@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group 'com.ablodich.smis'
+version '1.0.0-SNAPSHOT'
+allprojects {
+    group 'com.ablodich.smis'
+}
+
+repositories {
+    mavenCentral()
+}
+
