@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+    id 'io.freefair.lombok' version "$lombokPluginVersion"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion"
+
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.postgresql:postgresql'
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+    implementation "commons-io:commons-io:$commonsIoVersion"
+    implementation "org.apache.commons:commons-collections4:$commonsCollectionsVersion"
+    implementation "org.hibernate.validator:hibernate-validator:$hibernateValidatorVersion"
+    implementation "com.google.guava:guava:$guavaVersion"
+
+    implementation "ai.djl:api:$djlVersion"
+    implementation "ai.djl.pytorch:pytorch-engine:$djlVersion"
+
+    implementation project(':smis-common-models')
+    implementation project(':smis-common-libs:smis-transactional-outbox-starter')
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,33 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9093
+    consumer:
+      group-id: iap-user-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        max.poll.interval.ms: 200000
+        heartbeat.interval.ms: 5000
+        session.timeout.ms: 15000
+        max.poll.records: 10
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      buffer-memory: 10485760
+    listener:
+      concurrency: 1
+    properties:
+      backoff:
+        max-elapsed-time.ms: 32000
+        initial-interval.ms: 2000
+        max-interval.ms: 30000
+        multiplier: 2
+
+  datasource:
+    url: jdbc:tc:postgresql:13:///test
+    jdbc-url: jdbc:tc:postgresql:13:///test
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    type: com.zaxxer.hikari.HikariDataSource
+    username:
+    password:

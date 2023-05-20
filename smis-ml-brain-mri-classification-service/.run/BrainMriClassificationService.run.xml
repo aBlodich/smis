@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="BrainMriClassificationService" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <module name="smis-project.smis-ml-brain-mri-classification-service.main" />
+    <option name="PROGRAM_PARAMETERS" value="--spring.config.location=classpath:application.yml,smis-ml-brain-mri-classification-service/.configuration/application/application.yml" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.ablodich.smis.brainmriclassificationservice.BrainMriClassificationService" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

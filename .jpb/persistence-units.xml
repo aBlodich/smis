@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit moduleName="smis-project.smis-ml-brain-mri-classification-service.main" name="Default">
+        <packages>
+          <package value="com.ablodich.smis.brainmriclassificationservice" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit name="Default">
+        <packages>
+          <package value="com.ablodich.smis.diagnostictaskrouterservice" />
+          <package value="com.ablodich.smis.brainmriclassificationservice.entity" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>

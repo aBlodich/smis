@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SmisFileServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <module name="smis-project.smis-file-service.main" />
+    <option name="PROGRAM_PARAMETERS" value="--spring.config.location=classpath:application.yml,smis-file-service/.configuration/application/application.yml" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.ablodich.smis.fileservice.SmisFileServiceApplication" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.ablodich.smis.fileservice.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

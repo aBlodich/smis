@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${JDBC_USERNAME:postgres}
+    password: ${JDBC_PASSWORD:postgres}
+    url: ${JDBC_URL}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      auto-commit: false
+      data-source-properties:
+        useUnicode: true
+        characterEncoding: UTF-8
+      connection-timeout: ${JDBC_CONNECTION_TIMEOUT_MS:15000}
+      maximumPoolSize: ${JDBC_HIKARI_MAXIMUM_POOL_SIZE:10}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    show-sql: false
+    properties:
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+  sql:
+    init:
+      platform: postgres
+  flyway:
+    baseline-on-migrate: true
+  application:
+    name: smis-file-service
+server:
+  port: ${SERVER_PORT:8080}
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  accessKey: ${MINIO_ACCESS_KEY:smis_user}
+  secretKey: ${MINIO_SECRET_KEY:smis_pass}
+  defaultBucket: ${MINIO_DEFAULT_BUCKET:smis-images-bucket}
+logging:
+  level:
+    com.ablodich.smis.fileservice: ${SERVICE_LOG_LEVEL:debug}

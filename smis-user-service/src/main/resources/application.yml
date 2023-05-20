@@ -1,0 +1,57 @@
+spring:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: http://localhost:8090/realms/smis-realm/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8090/realms/smis-realm
+      client:
+        registration:
+          keycloak:
+            client-id: smis
+            authorization-grant-type: authorization_code
+            scope: openid
+  datasource:
+    url: ${JDBC_URL:jdbc:postgresql://localhost:5432/postgres?currentSchema=user-service}
+    username: ${JDBC_USERNAME:postgres}
+    password: ${JDBC_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      auto-commit: false
+      data-source-properties:
+        useUnicode: true
+        characterEncoding: UTF-8
+      connection-timeout: ${JDBC_CONNECTION_TIMEOUT_MS:15000}
+      maximumPoolSize: ${JDBC_HIKARI_MAXIMUM_POOL_SIZE:10}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    show-sql: false
+    properties:
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+  sql:
+    init:
+      platform: postgres
+  flyway:
+    baseline-on-migrate: true
+  application:
+    name: smis-user-service
+server:
+  port: ${SERVER_PORT:8080}
+logging:
+  level:
+    com.ablodich.smis.userservice: ${SERVICE_LOG_LEVEL:debug}
+feign:
+  client:
+    keycloak:
+      service-name: keycloak
+      service-url: http://localhost:8090
+smis:
+  security:
+    keycloak:
+      baseUrl: ${KEYCLOAK_BASE_URL:http://localhost:8090}
+      realm;: ${KEYCLOAK_REALM:smis-realm}
+      clientId: ${KEYCLOAK_CLIENT_ID:smis-user-service}
+      clientSecret: ${KEYCLOAK_CLIENT_SECRET:lEBD78tV8sjO9krZhIM8dBuXxLMDlzHk}

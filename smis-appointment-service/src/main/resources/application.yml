@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${JDBC_USERNAME:postgres}
+    password: ${JDBC_PASSWORD:postgres}
+    url: ${JDBC_URL}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      auto-commit: false
+      data-source-properties:
+        useUnicode: true
+        characterEncoding: UTF-8
+      connection-timeout: ${JDBC_CONNECTION_TIMEOUT_MS:15000}
+      maximumPoolSize: ${JDBC_HIKARI_MAXIMUM_POOL_SIZE:10}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    show-sql: false
+    properties:
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+  sql:
+    init:
+      platform: postgres
+  flyway:
+    baseline-on-migrate: true
+  application:
+    name: smis-appointment-service
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        max.poll.interval.ms: 200000
+        heartbeat.interval.ms: 5000
+        session.timeout.ms: 15000
+        max.poll.records: 10
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      buffer-memory: 10485760
+    listener:
+      concurrency: ${KAFKA_LISTENER_CONCURRENCY:2}
+server:
+  port: ${SERVER_PORT:8080}
+service:
+  topics:
+    appointment-validation-event-topic: ${APPOINTMENT_VALIDATION_EVENT_TOPIC:appointment-validation-event-topic}
+    appointment-validation-result-topic: ${APPOINTMENT_VALIDATION_RESULT_TOPIC:appointment-validation-result-topic}
+    link-appointment-event-topic: ${LINK_APPOINTMENT_EVENT_TOPIC:link-appointment-event-topic}
+    link-appointment-result-topic: ${LINK_APPOINTMENT_RESULT_TOPIC:link-appointment-result-topic}
+logging:
+  level:
+    com.ablodich.smis.appointmentservice: ${SERVICE_LOG_LEVEL:debug}

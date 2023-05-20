@@ -1,0 +1,29 @@
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion" apply(false)
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+    id 'io.freefair.lombok' version "$lombokPluginVersion"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    api "net.javacrumbs.shedlock:shedlock-spring:$shedlockVersion"
+    api "net.javacrumbs.shedlock:shedlock-provider-jdbc-template:$shedlockVersion"
+    implementation 'org.postgresql:postgresql'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation project(':smis-common-models')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.testcontainers:kafka:$testcontainersVersion"
+    testImplementation "org.testcontainers:testcontainers:$testcontainersVersion"
+    testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
+    testImplementation "org.testcontainers:postgresql:$testcontainersVersion"
+    testImplementation 'org.postgresql:postgresql'
+}

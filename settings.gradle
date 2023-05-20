@@ -1,2 +1,11 @@
 rootProject.name = 'smis-project'
 
+include 'smis-appointment-service'
+include 'smis-diagnostic-task-router-service'
+include 'smis-common-models'
+include 'smis-common-libs'
+include 'smis-common-libs:smis-transactional-outbox-starter'
+include 'smis-file-service'
+include 'smis-ml-brain-mri-classification-service'
+include 'smis-user-service'
+
